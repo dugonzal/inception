@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:03:50 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/10/14 11:03:53 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/10/14 16:23:47 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,10 @@ version: '3.8'
 services:
   nginx:
     #image: hello-world:latest
+    # image: nginx:alpine
     build:  
       # context: srcs/requirements/nginx
       dockerfile:  requirements/nginx/Dockerfile
+
     ports:
       - $PORTS:$PORTS

@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:04:21 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/10/14 11:04:25 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/10/14 16:18:59 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,13 @@ env SHELL=/bin/zsh
 
 workdir /nginx
 
-run chmod +x tools/main.sh
-
 copy . . 
 
-CMD ./tools/main.sh 
+
+run pwd
+#run chmod +x tools/main.sh
+
+
+
+
+#CMD  
