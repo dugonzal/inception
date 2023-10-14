@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  nginx:
+    #image: hello-world:latest
+    build:  
+      # context: srcs/requirements/nginx
+      dockerfile:  srcs/requirements/nginx/Dockerfile
+    ports:
+      - $PORTS:$PORTS
