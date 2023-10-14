@@ -1,25 +1,22 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Dockerfile                                         :+:      :+:    :+:    #
+#    docker-compose.yml                                 :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/14 11:04:21 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/10/14 11:04:25 by Dugonzal         ###   ########.fr        #
+#    Created: 2023/10/14 11:03:50 by Dugonzal          #+#    #+#              #
+#    Updated: 2023/10/14 11:03:53 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-from alpine:3.16
+version: '3.8'
 
-run apk add && apk update && apk upgrade && apk add zsh nginx openssl
-
-env SHELL=/bin/zsh 
-
-workdir /nginx
-
-run chmod +x tools/main.sh
-
-copy . . 
-
-CMD ./tools/main.sh 
+services:
+  nginx:
+    #image: hello-world:latest
+    build:  
+      # context: srcs/requirements/nginx
+      dockerfile:  requirements/nginx/Dockerfile
+    ports:
+      - $PORTS:$PORTS

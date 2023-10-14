@@ -1,8 +1,8 @@
 .
-├── docker-compose.yml
 ├── Makefile
-├── Readme.md
+├── README.md
 ├── srcs
+│   ├── docker-compose.yml
 │   └── requirements
 │       └── nginx
 │           └── Dockerfile
