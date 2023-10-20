@@ -1,1 +1,1 @@
-echo "hello world desde el script"
+service nginx status
