@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:03:32 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/14 21:06:13 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/15 22:01:44 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,11 @@ all:
 	sudo docker compose --file srcs/docker-compose.yml up --build --detach 
 
 clean:
-	sudo docker compose -f srcs/docker-compose.yml down 
+	sudo docker compose -f srcs/docker-compose.yml down  -v
 
 fclean: clean 
 	#sudo docker system prune --force
 	sh ./srcipts/cleanDocker.sh	
-	sudo docker volume rm srcs_wordpress
 
 s:
 	sudo docker ps 

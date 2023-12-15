@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:03:50 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/14 21:09:03 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/15 22:04:45 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,19 +15,18 @@ version: '3.8'
 services:
   nginx:
     container_name: nginx
-    #image: hello-world:latest
-    build:  
-      context:  requirements/nginx/ 
+    build:
+      context:  requirements/nginx/
       dockerfile:  Dockerfile
     ports:
       - 443:443
-      - 80:80
-    #volumes: # volume temp changes
-      #- ./requirements/conf.nginx:/usr/nginx/nginx.conf  
+    volumes:
+      - wordpress:/var/www/html/wordpress
     networks:
      - inception
     restart: always
-  wordpess:
+    env_file: .env
+  wordpress:
       container_name: wordpress
       build:
         context: requirements/wordpress/
@@ -36,7 +35,8 @@ services:
       networks:
       - inception
       volumes:
-       - wordpress:/var/www/
+       - wordpress:/var/www/html/wordpress
+      env_file: .env
 
 networks:
   inception:
@@ -48,4 +48,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/dugonzal/data/
+      device: /home/ciclo/Documentos/42/inception/srcs/requirements/wordpress/wordpressVolume/
