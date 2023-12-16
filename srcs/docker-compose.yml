@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:03:50 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/15 22:04:45 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/16 09:00:55 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,6 @@ services:
       dockerfile:  Dockerfile
     ports:
       - 443:443
-    volumes:
-      - wordpress:/var/www/html/wordpress
     networks:
      - inception
     restart: always
@@ -35,7 +33,7 @@ services:
       networks:
       - inception
       volumes:
-       - wordpress:/var/www/html/wordpress
+       - wordpress:/var/www/html/wordpress/
       env_file: .env
 
 networks:
