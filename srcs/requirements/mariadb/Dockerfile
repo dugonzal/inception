@@ -5,30 +5,15 @@
 #                                                     +:+ +:+         +:+      #
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/16 08:47:48 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/18 00:05:26 by Dugonzal         ###   ########.fr        #
+#    Created: 2023/12/18 00:11:49 by Dugonzal          #+#    #+#              #
+#    Updated: 2023/12/18 00:14:28 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-from  alpine:3.18
+from alpine:3.18
 
-LABEL author="dugonzal" 
+RUN apk update && apk upgrade --no-cache
 
-run  apk add && apk update --no-cache
-run  apk upgrade && apk add curl tar php81 php81-fpm php81-mysqli zsh --no-cache
+RUN apk add mariadb --no-cache
 
-EXPOSE 9000
-
-RUN curl -L  https://wordpress.org/latest.tar.gz | tar -xzv 
-
-RUN mkdir -p /var/www/html
-
-RUN mv wordpress/ /var/www/html/wordpress/
-
-COPY  conf/wp-config-sample.php  /var/www/html/wordpress/wp-config.php
-
-# deberia configurar 
-
-LABEL descriptionDemon="-D, --daemonize  -F, --nodaemonize force"
-
-CMD php-fpm81 -DF
+CMD sleep infinity

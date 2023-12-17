@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:04:21 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/15 23:09:24 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/18 00:07:02 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,6 @@ COPY  conf/nginx.conf /etc/nginx/nginx.conf
 
 COPY  conf/default.conf /etc/nginx/http.d/default.conf.template
 
-#STOPSIGNAL SIGQUIT
+STOPSIGNAL SIGQUIT
 
 CMD zsh -c "envsubst < /etc/nginx/http.d/default.conf.template > /etc/nginx/http.d/default.conf && rm -rf /etc/nginx/http.d/default.conf.template && exec nginx -g 'daemon off;'"
