@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:03:50 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/18 00:18:44 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/18 12:58:29 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ services:
     env_file: .env
     volumes:
       - wordpress:/var/www/html/wordpress
-    #depends_on: wordpress
+    depends_on: 
+    - wordpress
   wordpress:
       container_name: wordpress
       build:
@@ -44,7 +45,10 @@ services:
         context: requirements/mariadb
         dockerfile: Dockerfile
       volumes:
-      - mariadb:/workdir
+      - mariadb:/var/lib/mysql/
+      env_file: .env
+      depends_on: 
+      - wordpress
 networks:
   inception:
     name: inception

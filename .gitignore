@@ -1,2 +1,3 @@
-./v
-./srcs/requirements/wordpress/wordpressVolume/
+v
+srcs/requirements/wordpress/wordpressVolume/
+srcs/requirements/mariadb/mariadbVolume/

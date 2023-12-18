@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/16 08:47:48 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/18 00:05:26 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/18 12:38:39 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ from  alpine:3.18
 LABEL author="dugonzal" 
 
 run  apk add && apk update --no-cache
-run  apk upgrade && apk add curl tar php81 php81-fpm php81-mysqli zsh --no-cache
+run  apk upgrade && apk add curl tar php81 php81-fpm php81-mysqli zsh --no-cache && \
+	rm -rf /var/cache/apk/*
 
 EXPOSE 9000
 
