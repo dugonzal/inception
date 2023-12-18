@@ -6,13 +6,24 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:03:50 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/18 12:58:29 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/18 13:09:27 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 version: '3.8'
 
 services:
+  wordpress:
+      container_name: wordpress
+      build:
+        context: requirements/wordpress/
+        dockerfile:  Dockerfile
+      restart: always
+      networks:
+      - inception
+      volumes:
+       - wordpress:/var/www/html/wordpress/
+      env_file: .env
   nginx:
     container_name: nginx
     build:
@@ -28,17 +39,6 @@ services:
       - wordpress:/var/www/html/wordpress
     depends_on: 
     - wordpress
-  wordpress:
-      container_name: wordpress
-      build:
-        context: requirements/wordpress/
-        dockerfile:  Dockerfile
-      restart: always
-      networks:
-      - inception
-      volumes:
-       - wordpress:/var/www/html/wordpress/
-      env_file: .env
   mariadb:
       container_name: mariadb
       build:
@@ -49,6 +49,7 @@ services:
       env_file: .env
       depends_on: 
       - wordpress
+
 networks:
   inception:
     name: inception

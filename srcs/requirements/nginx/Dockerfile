@@ -6,13 +6,13 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:04:21 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/18 00:07:02 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/18 20:15:18 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 from alpine:3.18
 
-run apk add && apk update && apk upgrade --no-cache && apk add zsh nginx openssl tree certbot openrc zsh gettext --no-cache
+run apk add && apk update && apk upgrade --no-cache && apk add zsh nginx openssl tree certbot openrc zsh gettext --no-cache && rm -rf /var/cache/apk/*
 
 EXPOSE 443
 

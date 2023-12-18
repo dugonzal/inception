@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:03:32 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/15 22:01:44 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/18 18:21:58 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ clean:
 fclean: clean 
 	#sudo docker system prune --force
 	sh ./srcipts/cleanDocker.sh	
-
+	sudo rm -rf srcs/requirements/wordpress/wordpressVolume/*
+	sudo rm -rf srcs/requirements/mariadb/mariadbVolume/*
 s:
 	sudo docker ps 
 	@printf '\n\n'

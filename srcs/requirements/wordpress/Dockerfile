@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/16 08:47:48 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/18 12:38:39 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/18 18:02:16 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,7 @@ from  alpine:3.18
 LABEL author="dugonzal" 
 
 run  apk add && apk update --no-cache
-run  apk upgrade && apk add curl tar php81 php81-fpm php81-mysqli zsh --no-cache && \
-	rm -rf /var/cache/apk/*
+run  apk upgrade && apk add curl tar php81 php81-fpm php81-mysqli zsh --no-cache && rm -rf /var/cache/apk/*
 
 EXPOSE 9000
 
@@ -29,7 +28,6 @@ RUN mv wordpress/ /var/www/html/wordpress/
 COPY  conf/wp-config-sample.php  /var/www/html/wordpress/wp-config.php
 
 # deberia configurar 
-
 LABEL descriptionDemon="-D, --daemonize  -F, --nodaemonize force"
 
 CMD php-fpm81 -DF
