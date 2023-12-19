@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:03:32 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/18 18:21:58 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/19 13:54:17 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,9 @@ all:
 	sudo docker compose --file srcs/docker-compose.yml up --build --detach 
 
 clean:
-	sudo docker compose -f srcs/docker-compose.yml down  -v
+	sudo docker compose -f srcs/docker-compose.yml down  --volumes
 
 fclean: clean 
-	#sudo docker system prune --force
 	sh ./srcipts/cleanDocker.sh	
 	sudo rm -rf srcs/requirements/wordpress/wordpressVolume/*
 	sudo rm -rf srcs/requirements/mariadb/mariadbVolume/*
@@ -29,6 +28,14 @@ s:
 	sudo docker ps -aq 
 	@printf '\n\n'
 	sudo docker images
+logs:
+	sudo docker logs mariadb
+	sudo docker logs nginx
+	sudo docker logs wordpress 
+
+show:
+	sudo docker exec -it mariadb sh -c 'mysql -u mysql --socket=/tmp/mysql.sock -e "SHOW DATABASES;"'
+
 
 status: s 
 	sudo docker-compose -f srcs/docker-compose.yml config

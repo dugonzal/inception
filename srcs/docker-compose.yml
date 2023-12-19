@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:03:50 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/18 13:09:27 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/19 14:56:52 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,9 @@ services:
       volumes:
       - mariadb:/var/lib/mysql/
       env_file: .env
-      depends_on: 
+      depends_on:
       - wordpress
+    # restart: always
 
 networks:
   inception:

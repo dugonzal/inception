@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/18 00:11:49 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/18 20:14:16 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/19 15:40:24 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ tambien hay que crear un archivo en  * touch /run/openrc/softlevel"
 
 RUN openrc
 
-copy conf/my.conf /etc/mysql/my.conf
+copy conf/my.cnf /etc/mysql/my.cnf
 
 RUN touch /run/openrc/softlevel
 
@@ -35,8 +35,8 @@ ADD conf/init.sql /docker-entrypoint-initdb.d/init.sql
 
 RUN chmod +xr /docker-entrypoint-initdb.d/
 
-RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql --init-file=/docker-entrypoint-initdb.d/init.sql
+#RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql --init-file=/docker-entrypoint-initdb.d/init.sql
 
 STOPSIGNAL SIGTERM
 
-CMD  /usr/share/mariadb/mysql.server start && rc-service mariadb start
+CMD mysqld_safe 
