@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:03:32 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/19 13:54:17 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/19 20:08:05 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ logs:
 	sudo docker logs wordpress 
 
 show:
-	sudo docker exec -it mariadb sh -c 'mysql -u mysql --socket=/tmp/mysql.sock -e "SHOW DATABASES;"'
+	sudo docker exec -it mariadb sh -c 'mariadb -u localhost   --socket=/tmp/mysql.sock -e "SHOW DATABASES;"'
 
 
 status: s 
