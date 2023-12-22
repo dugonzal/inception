@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/16 08:47:48 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/19 13:43:44 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/22 17:29:32 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ EXPOSE 9000
 
 RUN mkdir -p /var/www/html
 
-RUN curl -L  https://wordpress.org/latest.tar.gz | tar -xzv &&  mv wordpress/ /var/www/html/wordpress/
+RUN curl -L  https://wordpress.org/wordpress-4.2.2.tar.gz | tar -xzv &&  mv wordpress/ /var/www/html/wordpress/
 
 COPY  conf/wp-config-sample.php  /var/www/html/wordpress/wp-config.php
 
