@@ -38,7 +38,7 @@ logs:
 	sudo docker logs wordpress 
 
 show:
-	sudo docker exec -it mariadb sh -c 'mariadb -u localhost   --socket=/tmp/mysql.sock -e "SHOW DATABASES;"'
+	sudo docker exec -it mariadb sh -c 'mariadb --socket=/tmp/mysql.sock -e "SHOW DATABASES;"'
 
 
 status: s 

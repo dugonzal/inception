@@ -15,46 +15,66 @@ version: '3.8'
 services:
   wordpress:
       container_name: wordpress
-      build:
-        context: requirements/wordpress/
-        dockerfile:  Dockerfile
-      restart: always
-      networks:
-      - inception
+      build: requirements/wordpress/
       volumes:
-       - wordpress:/var/www/html/wordpress/
+       - wordpress:/var/www/html/
       env_file: .env
+      ports:
+      - 9000:9000
+      networks:
+       inception:
+         ipv4_address: 192.168.1.3
+    #restart: always
   nginx:
     container_name: nginx
-    build:
-      context:  requirements/nginx/
-      dockerfile:  Dockerfile
+    build: requirements/nginx/
     ports:
       - 443:443
     networks:
-     - inception
-    restart: always
+       inception:
+         ipv4_address: 192.168.1.4
     env_file: .env
     volumes:
-      - wordpress:/var/www/html/wordpress
+      - wordpress:/var/www/html
     depends_on: 
     - wordpress
+    #restart: always
+      #
+  #  mariadb:
+    # container_name: mariadb_test
+    #    image: mariadb:11.2
+    #   networks:
+# inception:
+#       ipv4_address: 192.168.1.5
+    #   volumes:
+# - mariadb:/var/lib/mysql
+    #   environment:
+# MARIADB_USER: inception
+#     MARIADB_PASSWORD: inception
+#     MARIADB_DATABASE: inception
+#     MARIADB_ROOT_PASSWORD: inception
   mariadb:
-      container_name: mariadb
-      build:
-        context: requirements/mariadb
-        dockerfile: Dockerfile
-      volumes:
-      - mariadb:/var/lib/mysql/
-      env_file: .env
-      depends_on:
-      - wordpress
-    # restart: always
+    container_name: mariadb
+    build:
+      context: requirements/mariadb
+      dockerfile: Dockerfile
+    volumes:
+    - mariadb:/var/lib/mysql/
+    env_file: .env
+    depends_on:
+     - wordpress
+    networks:
+       inception:
+          ipv4_address: 192.168.1.5
+    #restart: always
 
 networks:
   inception:
-    name: inception
-
+      driver: bridge
+      ipam:
+        driver: default
+        config:
+        - subnet: 192.168.1.0/24
 volumes:
    wordpress:
     driver: local

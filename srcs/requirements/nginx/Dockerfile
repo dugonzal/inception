@@ -12,7 +12,7 @@
 
 FROM alpine:3.18.5
 
-run apk add && apk update && apk upgrade --no-cache && apk add zsh nginx openssl tree certbot openrc zsh gettext --no-cache && rm -rf /var/cache/apk/*
+run apk add && apk update && apk upgrade --no-cache && apk add zsh nginx openssl zsh gettext --no-cache && rm -rf /var/cache/apk/*
 
 EXPOSE 443
 

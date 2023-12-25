@@ -1,3 +1,5 @@
 v
+.gitignore
+cp
 srcs/requirements/wordpress/wordpressVolume/
 srcs/requirements/mariadb/mariadbVolume/
