@@ -30,7 +30,7 @@ define( 'DB_USER', 'inception' );
 define( 'DB_PASSWORD', 'inception');
 
 /** Database hostname */
-define( 'DB_HOST', 'mariadb:3306' );
+define( 'DB_HOST', 'mariadb.srcs_inception' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );

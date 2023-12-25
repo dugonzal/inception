@@ -22,9 +22,9 @@ RUN openrc
 RUN mkdir -p /var/lib/mysqld && chown -R 777:777 /var/lib/mysqld
 
 COPY conf/init.sql /docker-entrypoint-initdb.d/init.sql
-COPY conf/my.cnf /etc/mysql/
+COPY conf/my.cnf /etc/
 
-RUN chmod 644 /docker-entrypoint-initdb.d/init.sql /etc/mysql/my.cnf
+RUN chmod 644 /docker-entrypoint-initdb.d/init.sql /etc/my.cnf
 
 RUN mysql_install_db --verbose --user=mysql --datadir=/var/lib/mysqld
 
