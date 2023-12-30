@@ -12,13 +12,13 @@
 
 SHELL 				:= /bin/zsh
 
-volumeWordpress		:= /home/ciclo/Documentos/42/inception/srcs/requirements/wordpress/wordpressVolume/
-volumeMariadb		:= /home/ciclo/Documentos/42/inception/srcs/requirements/mariadb/mariadbVolume/
+volumeWordpress		:= /home/ciclo/Documents/42/inception/srcs/requirements/wordpress/wordpressVolume/
+volumeMariadb		:= /home/ciclo/Documents/42/inception/srcs/requirements/mariadb/mariadbVolume/
 
 all:
 	 mkdir -p ${volumeMariadb}
 	 mkdir -p ${volumeWordpress}
-	sudo docker compose --file srcs/docker-compose.yml up --build --detach 
+	 sudo docker compose --file srcs/docker-compose.yml up --build --detach 
 clean:
 	sudo docker compose -f srcs/docker-compose.yml down  --volumes
 	

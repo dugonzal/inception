@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    docker-compose.yml                                 :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
+#    By: dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:03:50 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/19 14:56:52 by Dugonzal         ###   ########.fr        #
+#    Updated: 2023/12/31 00:04:30 by dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,10 +74,10 @@ volumes:
    driver_opts:
      type: none
      o: bind
-     device: /home/ciclo/Documentos/42/inception/srcs/requirements/wordpress/wordpressVolume/
+     device: /home/ciclo/Documents/42/inception/srcs/requirements/wordpress/wordpressVolume/
   mariadb:
    driver: local
    driver_opts:
      type: none
      o: bind
-     device: /home/ciclo/Documentos/42/inception/srcs/requirements/mariadb/mariadbVolume/
+     device: /home/ciclo/Documents/42/inception/srcs/requirements/mariadb/mariadbVolume/
