@@ -14,22 +14,41 @@ FROM alpine:3.18.5
 
 LABEL author="dugonzal" 
 
-run  apk add && apk update --no-cache
-run  apk upgrade && apk add --no-cache php81 php81-fpm php81-mysqli php81-json php81-openssl php81-curl php81-zlib php81-xml php81-phar curl tar mysql-client openrc \
-    && rm -rf /var/cache/apk/*
+RUN  apk add && apk update --no-cache
+RUN  apk upgrade && apk add --no-cache php81 php81-fpm php81-mysqli  php81-mbstring\
+  php81-json php81-openssl php81-curl php81-zlib php81-xml php81-phar php81-cgi curl tar mysql-client openrc zsh\
+  && rm -rf /var/cache/apk/*
 
 EXPOSE 9000
+RUN openrc
 
 RUN mkdir -p /var/www/html
 
-RUN curl -L  https://wordpress.org/wordpress-6.4.2.tar.gz | tar -xzv &&  mv wordpress/ /var/www/html/wordpress/
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
-COPY  conf/wp-config-sample.php  /var/www/html/wordpress/wp-config.php
+RUN chmod +x wp-cli.phar && mv wp-cli.phar /bin/wp
 
+RUN wp core download --url=https://wordpress.org/wordpress-6.4.tar.gz --locale=es_ES --path=/var/www/html/wordpress
+
+ADD ./conf/php.ini /etc/php81/
+
+RUN rm -rf /var/www/html/wordpress/wp-config.php
+#COPY  conf/wp-config-sample.php  /var/www/html/wordpress/wp-config.php
+
+RUN chmod 777 /var/www/html/wordpress/
 # deberia configurar 
 LABEL descriptionDemon="-D, --daemonize  -F, --nodaemonize force"
 
+
+#RUN sleep 10 && wp core config --dbhost=mariadb:3306 --dbname=inception --dbuser=inception --dbpass=inception
+
 WORKDIR /var/www/html/wordpress/
 
-CMD   php -S 0.0.0.0:9000
-#CMD php-fpm81 --daemonize --nodaemonize -c /etc/php81/php-fpm.d/www.conf
+ADD ./tools/main.sh /tmp 
+
+RUN chmod +x /tmp/main.sh
+
+CMD zsh /tmp/main.sh
+
+#CMD   php -S 0.0.0.0:9000
+#CMD php-fpm81 --nodaemonize -c /etc/php81/php-fpm.d/www.conf

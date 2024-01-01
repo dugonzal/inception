@@ -12,11 +12,20 @@
 
 FROM alpine:3.18.5
 
-run apk add && apk update && apk upgrade --no-cache && apk add zsh nginx openssl zsh gettext --no-cache && rm -rf /var/cache/apk/*
+RUN apk add && apk update && apk upgrade --no-cache \
+  && apk add zsh nginx openssl zsh gettext --no-cache && rm -rf /var/cache/apk/*
 
-EXPOSE 443
+EXPOSE 443 
 
 #RUN sed -i '/^http {/a daemon off;' /etc/nginx/nginx.conf
+#USER nginx
+
+RUN mkdir -p /etc/nginx/ssl/
+
+RUN openssl req -x509 -newkey rsa:2048 -keyout /etc/nginx/ssl/server.key \
+  -out /etc/nginx/ssl/server.crt -days 365 -nodes -subj "/CN=dugonzal42.fr"
+
+RUN chown  -R nginx:nginx /var/lib/nginx
 
 COPY  conf/nginx.conf /etc/nginx/nginx.conf 
 

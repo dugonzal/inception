@@ -38,7 +38,7 @@ logs:
 	sudo docker logs wordpress 
 
 show:
-	sudo docker exec -it mariadb sh -c 'mariadb --socket=/tmp/mysql.sock -e "SHOW DATABASES;"'
+	sudo docker exec -it mariadb sh -c 'mariadb --socket=/tmp/mysqld.sock -e "SHOW DATABASES;"'
 
 
 status: s 
@@ -51,6 +51,10 @@ status: s
 	
 	@printf '\n\n'
 	sudo docker-compose -f srcs/docker-compose.yml logs
+	@printf '\n\n'
+	docker volumes ls 
+	@printf '\n\n'
+	docker Networks ls
 
 ip:
 	sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${ip}
