@@ -28,7 +28,7 @@ services:
       container_name: wordpress
       build: requirements/wordpress/
       volumes:
-      - wordpress:/var/www/html/
+      - wordpress:/var/www/html/wordpress/
       ports:
       - 9000:9000
       depends_on:
@@ -37,20 +37,20 @@ services:
       - inception
       env_file: .env
       #restart: always
-  nginx:
-    container_name: nginx
-    build: requirements/nginx/
+  #  nginx:
+#    container_name: nginx
+#    build: requirements/nginx/
     #image: nginx
-    ports:
-    - 443:443 
-    networks:
-    - inception
-    env_file: .env
-    volumes:
-    - wordpress:/var/www/html:chmod=755
-    depends_on:
-    - wordpress
-    - mariadb 
+#    ports:
+#    - 443:443 
+#    networks:
+#    - inception
+#    env_file: .env
+#    volumes:
+#    - wordpress:/var/www/html/wordpress/:chmod=755
+#    depends_on:
+#    - wordpress
+#    - mariadb 
     #restart: always
 
 networks:

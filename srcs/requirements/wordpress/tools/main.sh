@@ -11,8 +11,8 @@ done
 wp core config --path=/var/www/html/wordpress --dbname=inception --dbuser=inception --dbhost=mariadb --dbpass=inception
 
 sleep 5
-wp core install --url='0.0.0.0:9000' \
-    --title='dugonzal.42.fr' --admin_user='a' --admin_password='a' --admin_email=dugonzal@42.fr
+
+wp core install --url=0.0.0.0:9000 --title="$DOMAIN_NAME" --admin_user="$MARIADB_USER" --admin_password="$MARIADB_PASSWORD" --admin_email="$EMAIL"
 
 php81 -S 0.0.0.0:9000
 
