@@ -27,7 +27,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 
 RUN chmod +x wp-cli.phar && mv wp-cli.phar /bin/wp
 
-RUN wp core download --url=https://wordpress.org/wordpress-6.4.tar.gz --locale=es_ES --path=/var/www/html/wordpress
+RUN wp core download --url=https://wordpress.org/wordpress-6.4.2.tar.gz --locale=es_ES --path=/var/www/html/wordpress
 
 #ADD ./conf/php.ini /etc/php81/
 
