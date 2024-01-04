@@ -10,63 +10,60 @@
 #                                                                              #
 # **************************************************************************** #
 
-version: '3.8'
+version: "3.8"
 
 services:
   mariadb:
     container_name: mariadb
     build: requirements/mariadb/
     volumes:
-    - mariadb:/var/lib/mysql/
+      - mariadb:/var/lib/mariadb
     env_file: .env
-    # depends_on:
-# - wordpress
     networks:
-    - inception
-    #restart: always
-  wordpress:
-      container_name: wordpress
-      build: requirements/wordpress/
-      volumes:
-      - wordpress:/var/www/html/wordpress/
-      ports:
-      - 9000:9000
-      depends_on:
-      - mariadb  
-      networks:
       - inception
-      env_file: .env
-      #restart: always
-  #  nginx:
-#    container_name: nginx
-#    build: requirements/nginx/
-    #image: nginx
-#    ports:
-#    - 443:443 
-#    networks:
-#    - inception
-#    env_file: .env
-#    volumes:
-#    - wordpress:/var/www/html/wordpress/:chmod=755
-#    depends_on:
-#    - wordpress
-#    - mariadb 
+    restart: always
+  wordpress:
+    container_name: wordpress
+    build: requirements/wordpress/
+    volumes:
+      - wordpress:/var/www/html/wordpress/
+    ports:
+      - 9000:9000
+    depends_on:
+      - mariadb
+    networks:
+      - inception
+    env_file: .env
     #restart: always
+  nginx:
+    container_name: nginx
+    build: requirements/nginx/
+    ports:
+      - 443:443
+    networks:
+      - inception
+    env_file: .env
+    volumes:
+      - wordpress:/var/www/html/wordpress/:chmod=755
+    depends_on:
+      - wordpress
+      - mariadb
+#restart: always
 
 networks:
   inception:
-      driver: bridge
+    driver: bridge
 
 volumes:
   wordpress:
-   driver: local
-   driver_opts:
-     type: none
-     o: bind
-     device: /home/ciclo/Documents/42/inception/srcs/requirements/wordpress/wordpressVolume/
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ciclo/Documents/42/inception/srcs/requirements/wordpress/wordpressVolume/
   mariadb:
-   driver: local
-   driver_opts:
-     type: none
-     o: bind
-     device: /home/ciclo/Documents/42/inception/srcs/requirements/mariadb/mariadbVolume/
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ciclo/Documents/42/inception/srcs/requirements/mariadb/mariadbVolume/

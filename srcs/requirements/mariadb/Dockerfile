@@ -14,12 +14,12 @@ FROM alpine:3.18
 
 RUN apk update && apk upgrade --no-cache
 
-RUN apk add mariadb mariadb-client zsh openrc --no-cache && \
-    rm -rf /var/cache/apk/*
+RUN apk add mariadb mariadb-client zsh openrc --no-cache \
+  && rm -rf /var/cache/apk/*
 
 RUN openrc
 
-RUN mkdir -p /var/lib/mysqld && chown -R 777:777 /var/lib/mysqld
+RUN mkdir -p /var/lib/mariadb && chown -R 777:777 /var/lib/mariadb
 
 COPY conf/init.sql /docker-entrypoint-initdb.d/init.sql
 
@@ -31,10 +31,10 @@ RUN chmod -R 777 /tmp/
 
 RUN chmod 644 /docker-entrypoint-initdb.d/init.sql /etc/my.cnf
 
-RUN mysql_install_db --verbose --user=mysql --datadir=/var/lib/mysqld
+RUN mysql_install_db --verbose --user=mysql --datadir=/var/lib/mariadb
 
-WORKDIR /var/lib/mysqld/
+WORKDIR /var/lib/mariadb/
 
 USER mysql
 
-CMD ["mysqld", "--user=mysql", "--datadir=/var/lib/mysqld", "--init-file=/docker-entrypoint-initdb.d/init.sql"]
+CMD ["mysqld", "--user=mysql", "--datadir=/var/lib/mariadb", "--init-file=/docker-entrypoint-initdb.d/init.sql"]

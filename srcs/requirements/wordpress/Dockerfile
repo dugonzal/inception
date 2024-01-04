@@ -43,7 +43,7 @@ ADD tools/main.sh /tmp
 
 RUN chmod +x /tmp/main.sh
 
-CMD zsh /tmp/main.sh
+RUN adduser -S nginx && addgroup -S nginx
 
-#CMD   php -S 0.0.0.0:9000
+CMD zsh /tmp/main.sh
 #CMD php-fpm81 --nodaemonize -c /etc/php81/php-fpm.d/www.conf
