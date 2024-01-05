@@ -10,15 +10,16 @@
 #                                                                              #
 # **************************************************************************** #
 
-SHELL 				:= /bin/zsh
+SHELL 						:= /bin/zsh
 
 volumeWordpress		:= /home/ciclo/Documents/42/inception/srcs/requirements/wordpress/wordpressVolume/
-volumeMariadb		:= /home/ciclo/Documents/42/inception/srcs/requirements/mariadb/mariadbVolume/
+volumeMariadb			:= /home/ciclo/Documents/42/inception/srcs/requirements/mariadb/mariadbVolume/
 
 all:
 	 mkdir -p ${volumeMariadb}
 	 mkdir -p ${volumeWordpress}
-	 sudo docker compose --file srcs/docker-compose.yml up --build --detach 
+	 sudo docker-compose --env-file srcs/.env/ -f srcs/docker-compose.yml up --build --detach 
+
 clean:
 	sudo docker compose -f srcs/docker-compose.yml down  --volumes
 	
@@ -26,12 +27,14 @@ fclean: clean
 	sh ./srcipts/cleanDocker.sh	
 	sudo rm -rf srcs/requirements/wordpress/wordpressVolume/*
 	sudo rm -rf srcs/requirements/mariadb/mariadbVolume/*
+
 s:
 	sudo docker ps 
 	@printf '\n\n'
 	sudo docker ps -aq 
 	@printf '\n\n'
 	sudo docker images
+
 logs:
 	sudo docker logs mariadb
 	sudo docker logs nginx
@@ -39,7 +42,6 @@ logs:
 
 show:
 	sudo docker exec -it mariadb sh -c 'mariadb --socket=/tmp/mysqld.sock -e "SHOW DATABASES;"'
-
 
 status: s 
 	sudo docker-compose -f srcs/docker-compose.yml config

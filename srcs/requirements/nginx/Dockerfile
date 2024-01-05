@@ -1,33 +1,17 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Dockerfile                                         :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/14 11:04:21 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/19 13:43:35 by Dugonzal         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 FROM alpine:3.18.5
 
-RUN apk add && apk update && apk upgrade --no-cache \
-  && apk add zsh nginx openssl zsh gettext --no-cache && rm -rf /var/cache/apk/*
+RUN apk update && apk upgrade --no-cache  && apk add nginx openssl zsh --no-cache
 
-EXPOSE 443 
+RUN mkdir /etc/nginx/ssl
 
-RUN mkdir -p /etc/nginx/ssl/
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -sha256 \
+  -keyout /etc/nginx/ssl/openssl.key \
+  -out /etc/nginx/ssl/openssl.crt \
+  -subj "/C=SP/ST=Madrid/L=Bilbao/O=42/OU=IT/CN=dugonzal.42.fr/" \
+  && chown -R nginx:nginx /etc/nginx/ssl
 
-RUN openssl req -x509 -newkey rsa:2048 -keyout /etc/nginx/ssl/server.key \
-  -out /etc/nginx/ssl/server.crt -days 365 -nodes -subj "/CN=dugonzal42.fr"
+COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-RUN chown -R nginx:nginx /var/lib/nginx
+CMD ["nginx", "-g", "daemon off;"]
 
-COPY  conf/nginx.conf /etc/nginx/nginx.conf 
-
-COPY  conf/default.conf /etc/nginx/http.d/default.conf.template
-
-STOPSIGNAL SIGQUIT
-
-CMD zsh -c "envsubst < /etc/nginx/http.d/default.conf.template > /etc/nginx/http.d/default.conf && rm -rf /etc/nginx/http.d/default.conf.template && exec nginx -g 'daemon off;'"

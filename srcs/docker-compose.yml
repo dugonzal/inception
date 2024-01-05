@@ -21,20 +21,22 @@ services:
     env_file: .env
     networks:
       - inception
-    restart: always
+    #restart: always
+    expose:
+      - 3306/tcp
   wordpress:
     container_name: wordpress
     build: requirements/wordpress/
     volumes:
       - wordpress:/var/www/html/wordpress/
-    ports:
-      - 9000:9000
     depends_on:
       - mariadb
     networks:
       - inception
     env_file: .env
     #restart: always
+    expose:
+      - 9000/tcp
   nginx:
     container_name: nginx
     build: requirements/nginx/
@@ -44,15 +46,16 @@ services:
       - inception
     env_file: .env
     volumes:
-      - wordpress:/var/www/html/wordpress/:chmod=755
+      - wordpress:/var/www/html/wordpress/
     depends_on:
       - wordpress
       - mariadb
-#restart: always
+    #restart: always
 
 networks:
   inception:
-    driver: bridge
+    name: inception
+    driver: overlay
 
 volumes:
   wordpress:
