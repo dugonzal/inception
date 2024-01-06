@@ -8,20 +8,14 @@ done
 
 if [ /var/www/html/wordpress/wp-config.php ] ;then
     wp core config --path=/var/www/html/wordpress --dbname="$MARIADB_NAME" \
-      --dbuser="$MARIADB_USER" --dbhost="$MARIADB_HOST" --dbpass="$MARIADB_PASS" --allow-root
-  #--extra-php <<PHP 
- #     define( 'WP_DEBUG', true );
-  #    define( 'WP_DEBUG_LOG', true );
-#PHP \
+      --dbuser="$MARIADB_USER" --dbhost="$MARIADB_HOST" --dbpass="$MARIADB_PASS" --allow-root --extra-php <<PHP 
+      define( 'WP_DEBUG', true );
+      define( 'WP_DEBUG_LOG', true );
+PHP
   sleep 5 
   
   wp core install --url="$DOMAIN_NAME" --title="$DOMAIN_NAME" --admin_user="$MARIADB_USER" --admin_password="$MARIADB_PASS" --admin_email="$EMAIL" --allow-root
 fi 
-
-chown -R nginx:nginx /var/www/html/wordpress
-
-
-chmod 777 /var/www/html/wordpress
 
 php -S 0.0.0.0:9000
 

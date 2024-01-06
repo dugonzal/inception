@@ -12,27 +12,26 @@
 
 FROM alpine:3.18.5
 
-LABEL author="dugonzal" 
+LABEL author="dugonzal"
 
-RUN  apk add && apk update --no-cache && apk upgrade && apk add --no-cache php81 php81-fpm php81-mysqli  php81-mbstring \
-  php81-json php81-openssl php81-curl php81-zlib php81-xml php81-phar php81-cgi curl tar mysql-client zsh \
-  && rm -rf /var/cache/apk/*
+RUN apk update --update && apk upgrade --no-cache && apk add --no-cache php81=8.1.26-r0 \
+  php81-fpm=8.1.26-r0 php81-common=8.1.26-r0 php81-mysqli=8.1.26-r0 php81-mbstring=8.1.26-r0 \
+  php81-json php81-openssl=8.1.26-r0 php81-curl php81-zlib php81-xml php81-phar php81-cgi curl=8.5.0-r0 \
+  tar=1.34-r3 zsh=5.9-r2 && rm -rf /var/cache/apk/*
 
-RUN mkdir -p /var/www/html
+RUN mkdir -p /var/www/html/
 
-RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /bin/wp
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar \
+  && mv wp-cli.phar /bin/wp
 
-RUN wp core download --url=https://wordpress.org/wordpress-6.4.2.tar.gz --locale=es_ES --path=/var/www/html/wordpress
+RUN wp core download --url=https://wordpress.org/wordpress-6.4.2.tar.gz --locale=es_ES --path=/var/www/html/wordpress \
+  && chmod 777 /var/www/html/wordpress/
 
-RUN chmod 777 /var/www/html/wordpress/
-
-LABEL descriptionDemon="-D, --daemonize  -F, --nodaemonize force"
-
-COPY tools/main.sh /tmp
+COPY tools/main.sh /tmp/
 
 RUN chmod +x /tmp/main.sh
 
-COPY conf/www.conf /etc/php81/php-fpm.d/www.conf
+COPY conf/www.conf /etc/php81/php-fpm.d/
 
 WORKDIR /var/www/html/wordpress/
 

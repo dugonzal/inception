@@ -35,8 +35,10 @@ services:
       - inception
     env_file: .env
     #restart: always
-    expose:
-      - 9000/tcp
+    #    expose:
+    #  - 9000/tcp
+    ports:
+      - 9000:9000
   nginx:
     container_name: nginx
     build: requirements/nginx/
@@ -55,7 +57,7 @@ services:
 networks:
   inception:
     name: inception
-    driver: overlay
+    driver: bridge
 
 volumes:
   wordpress:
