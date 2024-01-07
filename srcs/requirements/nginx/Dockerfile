@@ -13,5 +13,11 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -sha256 \
 
 COPY ./conf/nginx.conf /etc/nginx/http.d/default.conf
 
+RUN mkdir -p /var/www/wordpress || sleep 10
+
+# Cambia propietarios del directorio
+RUN chown -R nginx:nginx /var/www/wordpress
+
+
 CMD ["nginx", "-g", "daemon off;"]
 
