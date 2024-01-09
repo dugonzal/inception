@@ -5,7 +5,7 @@ RUN apk update && apk upgrade --no-cache  && apk add zsh=5.9-r2 openssl=3.1.4-r1
 
 RUN mkdir /etc/nginx/ssl
 
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -sha256 \
+RUN openssl req -x509 -in -nodes -days 365 -newkey rsa:2048 -sha256 \
   -keyout /etc/nginx/ssl/openssl.key \
   -out /etc/nginx/ssl/openssl.crt \
   -subj "/C=SP/ST=Madrid/L=Bilbao/O=42/OU=IT/CN=dugonzal.42.fr/" \

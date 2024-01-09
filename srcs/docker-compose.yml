@@ -21,7 +21,7 @@ services:
     env_file: .env
     networks:
       - inception
-    #restart: always
+    restart: always
     expose:
       - 3306/tcp
   wordpress:
