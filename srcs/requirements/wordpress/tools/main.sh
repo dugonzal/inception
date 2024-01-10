@@ -6,7 +6,7 @@ while ! nc -z mariadb:3306 ; do
 	sleep 1;
 done
 
-if [ /var/www/wordpress/wp-config.php ] ;then
+if [ ! -f /var/www/wordpress/wp-config.php ] ;then
     wp core config --path=/var/www/wordpress --dbname="$MARIADB_NAME" \
       --dbuser="$MARIADB_USER" --dbhost="$MARIADB_HOST" --dbpass="$MARIADB_PASS" --allow-root --extra-php <<PHP 
       define( 'WP_DEBUG', true );
@@ -23,4 +23,4 @@ fi
 #mkdir -p /var/run/php-fpm81
 #php -S 0.0.0.0:9000
 
-php-fpm81 -FR #-c /etc/php81/conf.d/www.conf
+php-fpm81 -FR -c /etc/php81/conf.d/www.conf

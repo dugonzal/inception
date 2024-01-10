@@ -23,7 +23,7 @@ services:
       - inception
     restart: always
     expose:
-      - 3306/tcp
+      - 3306/udp
   wordpress:
     container_name: wordpress
     build: requirements/wordpress/
@@ -35,13 +35,13 @@ services:
       - inception
     env_file: .env
     expose:
-    - 9000/tcp
-    #restart: always
+    - 9000/udp
+    restart: always
   nginx:
     container_name: nginx
     build: requirements/nginx/
     ports:
-    - 80:80
+      - 80:80/tcp 
     networks:
     - inception
     env_file: .env
