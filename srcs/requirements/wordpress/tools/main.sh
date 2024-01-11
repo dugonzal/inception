@@ -1,4 +1,3 @@
-#! /bin/zsh
 
 while ! nc -z mariadb:3306 ; do
   ping -c 1  mariadb:3306
@@ -14,13 +13,18 @@ if [ ! -f /var/www/wordpress/wp-config.php ] ;then
       define('FS_METHOD', 'direct');
       define('FS_CHMOD_DIR', 0775);
       define('FS_CHMOD_FILE', 0664);
-
+      define('WP_HOME', 'https://dugonzal.42.fr');
+      define('WP_SITEURL', 'https://dugonzal.42.fr');
 PHP
   sleep 5 
   
-  wp core install --url="$DOMAIN_NAME" --title="inception, en la matrix" --admin_user="$MARIADB_USER" --admin_password="$MARIADB_PASS" --admin_email="$EMAIL" --allow-root
-fi 
+  wp core install --path=/var/www/wordpress --url="$DOMAIN_NAME" --title="inception, en la matrix" --admin_user="$MARIADB_USER" --admin_password="$MARIADB_PASS" --admin_email="$EMAIL" --allow-root
+  
+  wp update core --path=/var/www/wordpress --allow-root
+fi
 #mkdir -p /var/run/php-fpm81
 #php -S 0.0.0.0:9000
+#
+rm -rf /tmp/*
 
 php-fpm81 -FR -c /etc/php81/conf.d/www.conf

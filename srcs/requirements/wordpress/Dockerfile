@@ -6,7 +6,7 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/16 08:47:48 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/19 13:43:44 by Dugonzal         ###   ########.fr        #
+#    Updated: 2024/01/11 17:14:08 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,11 +33,13 @@ RUN wp core download --url=https://wordpress.org/wordpress-6.4.2.tar.gz --locale
 
 RUN chown -R www-data:www-data /var/www/wordpress/
 
-COPY tools/main.sh /tmp/
+COPY ./tools/main.sh /tmp/
 
 RUN chmod +x /tmp/main.sh
 
 COPY conf/www.conf /etc/php81/php-fpm.d/
+
+RUN rm -rf /var/www/wordpress/wp-config.php && rm -rf /var/www/wordpress/wp-config-sample.php
 
 WORKDIR /var/www/wordpress/
 
