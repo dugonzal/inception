@@ -2,4 +2,5 @@ v
 .gitignore
 cp
 srcs/requirements/wordpress/wordpressVolume/
+srcs/.env
 srcs/requirements/mariadb/mariadbVolume/
