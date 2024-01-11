@@ -1,8 +1,0 @@
-Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess                                 
-udp   UNCONN 0      0        224.0.0.251:5353       0.0.0.0:*    users:(("chromium",pid=2373,fd=180))   
-udp   UNCONN 0      0        224.0.0.251:5353       0.0.0.0:*    users:(("chromium",pid=2373,fd=161))   
-udp   UNCONN 0      0         172.27.0.1:46405      0.0.0.0:*    users:(("chromium",pid=2373,fd=159))   
-udp   UNCONN 0      0       10.64.238.85:51142      0.0.0.0:*    users:(("chromium",pid=2373,fd=156))   
-tcp   LISTEN 0      4096         0.0.0.0:443        0.0.0.0:*    users:(("docker-proxy",pid=55188,fd=4))
-tcp   LISTEN 0      4096       127.0.0.1:43591      0.0.0.0:*    users:(("containerd",pid=855,fd=10))   
-tcp   LISTEN 0      4096            [::]:443           [::]:*    users:(("docker-proxy",pid=55195,fd=4))
