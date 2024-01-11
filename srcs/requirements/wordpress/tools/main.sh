@@ -18,7 +18,7 @@ if [ ! -f /var/www/wordpress/wp-config.php ] ;then
 PHP
   sleep 5 
   
-  wp core install --url="$DOMAIN_NAME" --title="$DOMAIN_NAME" --admin_user="$MARIADB_USER" --admin_password="$MARIADB_PASS" --admin_email="$EMAIL" --allow-root
+  wp core install --url="$DOMAIN_NAME" --title="inception, en la matrix" --admin_user="$MARIADB_USER" --admin_password="$MARIADB_PASS" --admin_email="$EMAIL" --allow-root
 fi 
 #mkdir -p /var/run/php-fpm81
 #php -S 0.0.0.0:9000

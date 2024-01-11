@@ -6,11 +6,14 @@
 #    By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 11:03:32 by Dugonzal          #+#    #+#              #
-#    Updated: 2023/12/21 23:09:37 by Dugonzal         ###   ########.fr        #
+#    Updated: 2024/01/11 16:11:14 by Dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL 						:= /bin/zsh
+
+#include srcs/.env/
+#sudo ss -tulpn
 
 volumeWordpress		:= /home/ciclo/Documents/42/inception/srcs/requirements/wordpress/wordpressVolume/
 volumeMariadb			:= /home/ciclo/Documents/42/inception/srcs/requirements/mariadb/mariadbVolume/
