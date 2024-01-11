@@ -15,12 +15,12 @@ SHELL 						:= /bin/zsh
 #include srcs/.env/
 #sudo ss -tulpn
 
-volumeWordpress		:= /home/ciclo/Documents/42/inception/srcs/requirements/wordpress/wordpressVolume/
-volumeMariadb			:= /home/ciclo/Documents/42/inception/srcs/requirements/mariadb/mariadbVolume/
+volumeWordpress		:= /home/inception/data/wordpress 
+volumeMariadb			:= /home/inception/data/mariadb
 
 all:
-	 mkdir -p ${volumeMariadb}
-	 mkdir -p ${volumeWordpress}
+	 mkdir -p /home/inception/data/wordpress 
+	 mkdir -p /home/inception/data/mariadb
 	 sudo docker-compose --env-file srcs/.env/ -f srcs/docker-compose.yml up --build --detach 
 
 clean:
@@ -28,8 +28,8 @@ clean:
 	
 fclean: clean 
 	sh ./srcipts/cleanDocker.sh	
-	sudo rm -rf srcs/requirements/wordpress/wordpressVolume/*
-	sudo rm -rf srcs/requirements/mariadb/mariadbVolume/*
+	sudo rm -rf  /home/inception/data/wordpress 
+	sudo rm -rf /home/inception/data/mariadb
 
 s:
 	sudo docker ps 

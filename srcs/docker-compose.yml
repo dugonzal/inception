@@ -62,10 +62,10 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/ciclo/Documents/42/inception/srcs/requirements/wordpress/wordpressVolume/
+      device: /home/inception/data/wordpress
   mariadb:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/ciclo/Documents/42/inception/srcs/requirements/mariadb/mariadbVolume/
+      device: /home/inception/data/mariadb
